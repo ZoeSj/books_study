@@ -210,7 +210,35 @@ function table_unexpand($text)
     }
 }
 
-$string = "there was someone who don't  love u!";
+function analysis_comma_string($filename)
+{
+    $fh = fopen($filename, 'r') or die("can't open $filename");
+    print "<table>\n";
+    while ($csv_line = fgetcsv($fh)) {
+        print "<tr>";
+        for ($i = 0; $i < count($csv_line); $i++) {
+            print '<td>' . htmlentities($csv_line[$i]) . '</td>';
+        }
+        print "</tr>\n";
+    }
+    print "</table>\n";
+    fclose($fh) or die("can't close $filename");
+}
+
+function pack_len()
+{
+    $sales = [
+        ['Northeast', '2005-1-1', 121.4],
+        ['Northeast', '2005-2-1', 122.4],
+        ['Northeast', '2005-3-1', 123.4],
+    ];
+    foreach ($sales as $sale) {
+        print pack('A25A15A6', $sale[0], $sale[1], $sale[2] . "\n");
+    }
+}
+
+//$string = "there was someone who don't  love u!";
+//$string = "sales.csv";
 //rand_string(16, '.-');
-comma_string_put();
-$space = table_expand($string);
+pack_len();
+//$space = table_expand($string);
